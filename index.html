@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .clearFl { display:block; width:0; height:0; font-size:0; clear:both;}
+        .orno { display:inline-block; width:15px; height:15px; background:red;}
+        .wrap { width:1200px; margin:0 auto; border:1px solid #000;}
+        .wrap div {
+            text-indent:.5em;
+        }
+        .wrap > div {
+            border-bottom: 1px solid #000;
+        }
+        .title span {
+            margin-right:20px;
+        }
+        .info {
+            height:auto;
+        }
+        .info > div {
+            width:50%;
+            height:22px;
+            line-height:22px;
+            float:left;
+            border-bottom:1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="width:100%; height:50px; line-height:50px; text-align: center;">嘉宝官网信息收集系统</h2>
+<div class="wrap">
+    <div class="item">
+        <div class="title">
+            编号：<span class="number">20170727001</span>
+            星期：<span class="date">周四</span>
+            时间：<span class="time">20:11</span>
+            是否查看：<span class="orno checkOr"></span>
+            是否派单：<span class="orno sendOr"></span>
+        </div>
+    </div>
+    <div class="info">
+        <div>
+            客户姓名：<span class="name">张三</span>
+        </div>
+        <div>
+            所在城市：<span class="name">张三</span>
+        </div>
+        <div>
+            手机号码:<span class="phone">1888888888</span>
+        </div>
+        <div>
+            所在城市:<span class="city">长沙市</span>
+        </div>
+        <div>
+            QQ/微信：<span class="weico">200032019</span>
+        </div>
+        <div>
+            楼盘名称：<span class="house">东方新城</span>
+        </div>
+        <i class="clearFl"></i>
+    </div>
+    <div class="from">
+        <div>
+            访问网页地址
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
