@@ -1,79 +1,14 @@
 <!DOCTYPE html>
 <?php
-session_start();
-if($_SESSION['uid']){
-
-}else{
-    header('refresh:-1; checkIn.php');
-}
+include 'lgCheck.php';
 ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>嘉宝橱柜后台管理</title>
-    <style>
-        .bodyinner {
-            width:1200px;
-            margin:0 auto;
-            background:#eee;
-        }
-        .clearFl { display:block; width:0; height:0; font-size:0; clear:both;}
-        .orno { display:inline-block; width:15px; height:15px; background:red;}
-        .wrap { width:1200px; margin:20px auto 0; border:1px solid #000; border-bottom: none; background:#777;}
-        .wrap div {
-            text-indent:.5em;
-        }
-        .wrap > div > div{
-            border-bottom: 1px solid #000;
-            height:26px;
-            line-height:26px;
-        }
-        .title {
-            cursor:pointer;
-
-        }
-        .title span {
-            margin-right:20px;
-        }
-        .info {
-            height:auto;
-        }
-        .info > div {
-            width:50%;
-            float:left;
-
-        }
-
-        h2 {
-            width:100%; height:50px; line-height:50px; text-align: center;
-        }
-        h4 {color:#bd8a39; border-bottom: 1px #bd8a39 inset; height:26px; line-height:26px;}
-
-        h4 > span {
-            color:red; margin-right:20px;
-        }
-
-        .pageSelect {
-            color:#00a6b9;
-        }
-
-        .pageSelect > span {
-            color:#bd8a39;
-            margin-right:15px;
-        }
-
-        .pageSelect .changePage {
-            display:inline-block;
-            width: 68px;
-            height:26px;
-            line-height:26px;
-            background:#bd8a39;
-            text-align:center;
-            color:#000;
-            cursor:pointer;
-            margin-left:15px;
-        }
-    </style>
+    <link href="css/table.css" rel="stylesheet"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="js/closeLg.js"></script>
 </head>
 <body>
 <div class="bodyinner">
@@ -91,7 +26,11 @@ if($_SESSION['uid']){
             <?php
             echo $_SESSION['name'];
             ?>
-        </span>进入管理系统
+        </span>
+
+        <a class="changePW" href='changePW.php?id=<?php
+        echo $_SESSION['uid'];?>'>修改密码</a>
+        <span class="closeLg">退出系统</span>
     </h4>
 
     <?php
@@ -102,7 +41,7 @@ if($_SESSION['uid']){
     //  获取信息总条数
     $result = mysqli_query( $con,"SELECT id FROM user" );
     $num_rows = mysqli_num_rows( $result );
-    $pageTotle =  $num_rows%10;
+    $pageTotle =  ceil($num_rows/10);
 
     $prePages = $nowPages - 1;
     if( $prePages < 1){
@@ -116,7 +55,7 @@ if($_SESSION['uid']){
     $startPage = $nowPages * $showPage - $showPage;
     $startPageA = $startPage + 1;
     $endPage = $startPage + $showPage;
-    echo $nowPages.'<br/>'.$startPage.'<br/>'.$endPage;
+    echo $nowPages.'<br/>'.$startPage.'<br/>'.$endPage.'<br/>'.$pageTotle;
     $sql = "select * from user order by id desc limit $startPage, $endPage";
 
 
@@ -131,7 +70,7 @@ if($_SESSION['uid']){
             <span>
             $num_rows
             </span>
-        当前
+        当前显示
         <span>
         第  $startPageA 条 至 $endPage 条
         </span>
@@ -160,7 +99,7 @@ if($_SESSION['uid']){
                 是否查看：<span class=\"orno\" data-color=$data[checkOr]></span>
                 是否派单：<span class=\"orno\" data-color=$data[sendOr]></span>
                 信息渠道：<span class=\"infoFrom\">$data[infoFrom]</span>
-
+                <a class=\"renew\" href='updata.php?id=$data[id]' target='_blank'>修改客户资料</a>
             </div>
         </div>
         <div class=\"info\">
@@ -191,9 +130,7 @@ if($_SESSION['uid']){
             <div>
                 IP地址：<span class=\"IP\">$data[IP]</span>
             </div>
-            <div>
-                留言时间：<span class=\"time\">$data[time]</span>
-            </div>
+        
         </div>
 
     </div>";
@@ -202,13 +139,4 @@ if($_SESSION['uid']){
     ?>
 </div>
 </body>
-<script src="../js/jquery.min.js"></script>
-<script>
-    $(function(){
-        // changePage
-        $('.prePage').on('click', function(){
-            alert($startPage)
-        })
-    })
-</script>
 </html>
