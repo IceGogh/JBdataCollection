@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <?php
-include 'lgCheck.php';
+include '../lgCheck.php';
 ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>嘉宝橱柜后台管理</title>
-    <link href="css/table.css" rel="stylesheet"/>
-    <script src="../js/jquery.min.js"></script>
-    <script src="js/closeLg.js"></script>
+    <link href="../css/table.css" rel="stylesheet"/>
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../js/closeLg.js"></script>
 </head>
 <body>
 <div class="bodyinner">
 
-    <h2>嘉宝官网信息收集系统</h2>
+    <h2>嘉宝网络客户信息系统</h2>
     <h4>
         当前用户ID：
         <span>
@@ -28,13 +28,13 @@ include 'lgCheck.php';
             ?>
         </span>
 
-        <a class="changePW" href='changePW.php?id=<?php
+        <a class="changePW" href='../changePW/changePW.php?id=<?php
         echo $_SESSION['uid'];?>'>修改密码</a>
         <span class="closeLg">退出系统</span>
     </h4>
 
     <?php
-    include "connectAdmin.php";
+    include "../connectAdmin.php";
     //  根据 url 参数  若没有参数 取 1
     $nowPages = !empty($_GET['page']) ? $_GET['page'] : 1;
 
@@ -64,6 +64,7 @@ include 'lgCheck.php';
 
     echo "<h4>
         客户信息列表
+        <a href='../addInfo/addInfo.php?id=$_SESSION[uid]' style='float:right;'>添加客户</a>
     </h4>
     <div class=\"pageSelect\">
         客户信息总条数
@@ -82,9 +83,9 @@ include 'lgCheck.php';
         
             $pageTotle 
         </span>
-        <a href=\"http://localhost/Jiabao0519/admin/adminindex.php\" class='changePage first'>首页</a>
-        <a href=\"http://localhost/Jiabao0519/admin/adminindex.php?page={$prePages}\" class='changePage prePage'>上一页</a>
-        <a href=\"http://localhost/Jiabao0519/admin/adminindex.php?page={$nextPages}\" class='changePage nextPage'>下一页</a>
+        <a href=\"http://localhost/Jiabao0519/datas/admin/adminindex.php\" class='changePage first'>首页</a>
+        <a href=\"http://localhost/Jiabao0519/datas/admin/adminindex.php?page={$prePages}\" class='changePage prePage'>上一页</a>
+        <a href=\"http://localhost/Jiabao0519/datas/admin/adminindex.php?page={$nextPages}\" class='changePage nextPage'>下一页</a>
     </div>";
 
 
@@ -94,12 +95,12 @@ include 'lgCheck.php';
         <div class=\"item\">
             <div class=\"title\">
                 编号：<span class=\"number\">$data[id]</span>
-                星期：<span class=\"date\">$data[week]</span>
+                <span class=\"date\">星期$data[week]</span>
                 时间：<span class=\"time\">$data[time]</span>
                 是否查看：<span class=\"orno\" data-color=$data[checkOr]></span>
                 是否派单：<span class=\"orno\" data-color=$data[sendOr]></span>
                 信息渠道：<span class=\"infoFrom\">$data[infoFrom]</span>
-                <a class=\"renew\" href='updata.php?id=$data[id]' target='_blank'>修改客户资料</a>
+                <a class=\"renew\" href='../updata/updata.php?id=$data[id]'>修改客户资料</a>
             </div>
         </div>
         <div class=\"info\">
@@ -125,7 +126,10 @@ include 'lgCheck.php';
         </div>
         <div class=\"from\">
             <div>
-                访问网页地址：<span class=\"href\">$data[href]</span>
+                访问网页地址：
+                <span class=\"href\">
+                    <a href='$data[href]'>$data[href]</a>
+                </span>
             </div>
             <div>
                 IP地址：<span class=\"IP\">$data[IP]</span>

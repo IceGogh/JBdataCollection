@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <?php
-include 'connectAdmin.php';
+include '../connectAdmin.php';
 session_start();
 ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="css/table.css" rel="stylesheet"/>
+    <link href="../css/table.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -20,9 +20,11 @@ session_start();
             <?php
             echo $_SESSION['name'];
             ?>
+            </span>
+            <a href="../admin/adminIndex.php" style="float:right;">返回</a>
         </h4>
         <h3>密码修改</h3>
-        <form action="changePWsend.php" method="post">
+        <form action="changePWsend.php?id=<?php echo $_GET['id']; ?>" method="post">
             <p>
                 原　密码：<input type="password" name="oldPw" placeholder="请输入旧的密码"/>
             </p>
@@ -34,7 +36,6 @@ session_start();
             </p>
             <hr/>
             <input type="submit" value="确认修改"/>
-            <input type="button" value="取消修改"/>
         </form>
     </div>
 </body>

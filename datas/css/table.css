@@ -5,7 +5,7 @@
 }
 .clearFl { display:block; width:0; height:0; font-size:0; clear:both;}
 .orno { display:inline-block; width:15px; height:15px; background:red;}
-.wrap { width:1200px; margin:20px auto 0; border:1px solid #000; border-bottom: none; background:#777; padding:0 20px 10px;}
+.wrap { width:1160px; margin:20px auto 0; border:1px solid #000; border-bottom: none; background:#777; padding:20px;}
 .wrap div {
   text-indent:.5em;
 }

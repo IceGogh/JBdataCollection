@@ -31,7 +31,7 @@
     </style>
 </head>
 <body>
-    <h2>嘉宝橱柜管理后台登录系统(测试版1.0)</h2>
+    <h2>嘉宝橱柜管理后台登录系统(测试版1.0.1)</h2>
     <form action="adminlogin.php" method="POST">
         <p>
             <span>帐号</span>
@@ -46,7 +46,7 @@
         </p>
     </form>
 </body>
-<script src="../js/jquery.min.js"></script>
+<script src="../../js/jquery.min.js"></script>
 <script>
     $(function(){
         $('input').on('focus', function(){

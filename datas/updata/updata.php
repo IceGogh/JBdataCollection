@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <?php
-include "lgCheck.php";
+include "../lgCheck.php";
 ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="css/table.css" rel="stylesheet"/>
+    <link href="../css/table.css" rel="stylesheet"/>
     <style>
         input[readonly]{  background:#777; padding:0; border:0;}
     </style>
@@ -14,11 +14,10 @@ include "lgCheck.php";
 <body>
 <?php
 $id =  $_GET['id'];
-include 'connectAdmin.php';
+include '../connectAdmin.php';
 $query = mysqli_query($con,"select * from user where id = $id");
 $data = mysqli_fetch_assoc($query);
 echo "<form class=\"wrap\" action='updataSend.php' method='post'>
-
         <div class=\"item\">
             <div class=\"title\">
                 编号：<input class=\"number\" type='text' name='id' value='$data[id]' readonly>
@@ -27,7 +26,7 @@ echo "<form class=\"wrap\" action='updataSend.php' method='post'>
                 是否查看：<span class=\"orno\" data-color=$data[checkOr]></span>
                 是否派单：<span class=\"orno\" data-color=$data[sendOr]></span>
                 信息渠道：<span class=\"infoFrom\">$data[infoFrom]</span>
-                
+                <a href='../admin/adminIndex.php' style='float:right;'>返回首页</a>
             </div>
         </div>
         <div class=\"info\">
@@ -58,7 +57,6 @@ echo "<form class=\"wrap\" action='updataSend.php' method='post'>
             <div>
                 IP地址：<span class=\"IP\">$data[IP]</span>
             </div>
-          
         </div>
         <input type='submit' value='确认修改'/>
         
