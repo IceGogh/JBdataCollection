@@ -9,9 +9,9 @@ session_start();
     <link href="../css/table.css" rel="stylesheet"/>
 </head>
 <body>
-<h2>后台信息添加</h2>
+<h2>客户信息添加</h2>
 <?php
-
+$team = substr($_SESSION['uid'], 0 ,1);
 echo "<form class=\"wrap\" action='addInfoSend.php' method='post'>
       <h4>
         当前ID：
@@ -34,6 +34,9 @@ echo "<form class=\"wrap\" action='addInfoSend.php' method='post'>
                 <span class=\"date\">
                 信息渠道：
                     <span class=\"infoFrom\">
+                            <label>
+                                <input type='radio' name='from' value='官网'/>官网
+                            </label>
                             <label>
                                 <input type='radio' name='from' value='天猫'/>天猫
                             </label>
@@ -66,13 +69,21 @@ echo "<form class=\"wrap\" action='addInfoSend.php' method='post'>
                 手机号码 : <input type='text' name=\"phone\">
             </div>
             <div>
+                所属团队 : $team
+            </div>
+
+            <div>
                 所在城市 : <input type='text' name=\"city\">
+            </div>
+            <div>
+                楼盘名称：<input type='text' name=\"house\">
             </div>
             <div>
                 QQ/微信：<input type='text' name=\"weico\">
             </div>
+           
             <div>
-                楼盘名称：<input type='text' name=\"house\">
+                跟进导购：<input type='text' name=\"guide\">
             </div>
             <i class=\"clearFl\"></i>
         </div>

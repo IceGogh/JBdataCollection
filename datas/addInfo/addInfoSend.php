@@ -11,7 +11,7 @@ $weekArray = array("日", "一", "二", "三", "四", "五", "六");
 $week = $weekArray[date('w')];
 $team =  substr($_SESSION['uid'],0,1);
 
-$add = "insert into user (name, phone, location, house, time, checkOr, sendOr, infoFrom, team, week, weico, customer) value ('$_POST[name]', '$_POST[phone]', '$_POST[city]', '$_POST[house]', '$time', '1', '1', '$_POST[from]', '$team', '$week', '$_POST[weico]', '$_SESSION[name]')";
+$add = "insert into user (name, phone, location, house, time, status, infoFrom, team, week, weico, customer, guide) value ('$_POST[name]', '$_POST[phone]', '$_POST[city]', '$_POST[house]', '$time', '1' , '$_POST[from]', '$team', '$week', '$_POST[weico]', '$_SESSION[name]', '$_POST[guide]')";
 
 $query = mysqli_query($con, $add);
 if(!$query){

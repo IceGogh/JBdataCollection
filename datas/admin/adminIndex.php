@@ -15,13 +15,13 @@ include '../lgCheck.php';
 
     <h2>嘉宝网络客户信息系统</h2>
     <h4>
-        当前用户ID：
+        当前ID：
         <span>
             <?php
             echo $_SESSION['uid'];
             ?>
         </span>
-        欢迎
+        用户:
         <span>
             <?php
             echo $_SESSION['name'];
@@ -54,8 +54,11 @@ include '../lgCheck.php';
     $showPage = 10;
     $startPage = $nowPages * $showPage - $showPage;
     $startPageA = $startPage + 1;
-    $endPage = $startPage + $showPage;
-    echo $nowPages.'<br/>'.$startPage.'<br/>'.$endPage.'<br/>'.$pageTotle;
+    $endPage = $nowPages * $showPage;
+    if($endPage > $num_rows){
+        $endPage = $num_rows;
+    }
+    echo '现在页：'.$nowPages.'<br/>'.'开始页'.$startPage.'<br/>'.'结束页'.$endPage.'<br/>'.$pageTotle;
     $sql = "select * from user order by id desc limit $startPage, $endPage";
 
 
@@ -97,9 +100,9 @@ include '../lgCheck.php';
                 编号：<span class=\"number\">$data[id]</span>
                 <span class=\"date\">星期$data[week]</span>
                 时间：<span class=\"time\">$data[time]</span>
-                是否查看：<span class=\"orno\" data-color=$data[checkOr]></span>
-                是否派单：<span class=\"orno\" data-color=$data[sendOr]></span>
-                信息渠道：<span class=\"infoFrom\">$data[infoFrom]</span>
+                状态：<span class=\"orno$data[status]\" data-color=$data[status]></span>
+              
+                
                 <a class=\"renew\" href='../updata/updata.php?id=$data[id]'>修改客户资料</a>
             </div>
         </div>
@@ -108,19 +111,33 @@ include '../lgCheck.php';
                 客户姓名：<span class=\"name\">$data[name]</span>
             </div>
             <div>
-                责任客服：<span class=\"name\">$data[customer]</span>
+                信息来源：<span class=\"infoFrom\">$data[infoFrom]</span>
             </div>
             <div>
                 手机号码 : <span class=\"phone\">$data[phone]</span>
+            </div>
+
+            <div>
+                责任客服：<span class=\"name\">$data[customer]</span>
             </div>
             <div>
                 所在城市 : <span class=\"city\">$data[location]</span>
             </div>
             <div>
+                所属团队 : <span class=\"team\">$data[team]</span>
+            </div>
+            
+            <div>
                 QQ/微信：<span class=\"weico\">$data[weico]</span>
             </div>
             <div>
                 楼盘名称：<span class=\"house\">$data[house]</span>
+            </div>
+            <div>
+                IP地址：<span class=\"IP\">$data[IP]</span>
+            </div>
+            <div>
+                跟进导购：<span class=\"guide\">$data[guide]</span>
             </div>
             <i class=\"clearFl\"></i>
         </div>
@@ -131,9 +148,7 @@ include '../lgCheck.php';
                     <a href='$data[href]'>$data[href]</a>
                 </span>
             </div>
-            <div>
-                IP地址：<span class=\"IP\">$data[IP]</span>
-            </div>
+            
         
         </div>
 

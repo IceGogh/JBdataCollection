@@ -2,7 +2,7 @@
 
 include '../connectAdmin.php';
 
-$renew = "update user set location = '$_POST[location]' , weico = '$_POST[weico]' , house = '$_POST[house]' where id = $_POST[id]";
+$renew = "update user set infoFrom = '$_POST[from]', name = '$_POST[name]', phone = '$_POST[phone]', location = '$_POST[location]' , weico = '$_POST[weico]' , house = '$_POST[house]', guide = '$_POST[guide]' where id = $_POST[id]";
 $query = mysqli_query($con, $renew);
 if(!$query){
     echo mysqli_error($con);

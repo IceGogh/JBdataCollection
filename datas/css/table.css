@@ -4,7 +4,10 @@
   background:#eee;
 }
 .clearFl { display:block; width:0; height:0; font-size:0; clear:both;}
-.orno { display:inline-block; width:15px; height:15px; background:red;}
+.orno1 { display:inline-block; width:15px; height:15px; background:red;}
+.orno2 { display:inline-block; width:15px; height:15px; background:yellow;}
+.orno3 { display:inline-block; width:15px; height:15px; background:green;}
+.orno4 { display:inline-block; width:15px; height:15px; background:blue;}
 .wrap { width:1160px; margin:20px auto 0; border:1px solid #000; border-bottom: none; background:#777; padding:20px;}
 .wrap div {
   text-indent:.5em;
@@ -70,4 +73,7 @@ h4 > span {
 .closeLg, .changePW{
   float:right;
   cursor:pointer;
+}
+.infoFrom label{
+  cursor: pointer;
 }
