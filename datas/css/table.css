@@ -4,10 +4,10 @@
   background:#eee;
 }
 .clearFl { display:block; width:0; height:0; font-size:0; clear:both;}
-.orno1 { display:inline-block; width:15px; height:15px; background:red;}
-.orno2 { display:inline-block; width:15px; height:15px; background:yellow;}
-.orno3 { display:inline-block; width:15px; height:15px; background:green;}
-.orno4 { display:inline-block; width:15px; height:15px; background:blue;}
+.orno1 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:red;}
+.orno2 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:yellow;}
+.orno3 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:green;}
+.orno4 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:blue;}
 .wrap { width:1160px; margin:20px auto 0; border:1px solid #000; border-bottom: none; background:#777; padding:20px;}
 .wrap div {
   text-indent:.5em;
@@ -16,6 +16,7 @@
   border-bottom: 1px solid #000;
   height:26px;
   line-height:26px;
+  margin-top:5px;
 }
 .title {
   cursor:pointer;
@@ -77,3 +78,9 @@ h4 > span {
 .infoFrom label{
   cursor: pointer;
 }
+
+.title{
+  color:#eee;
+}
+
+

@@ -26,9 +26,15 @@ echo "<form class=\"wrap\" action='updataSend.php' method='post'>
                 编号：<input class=\"number\" type='text' name='id' value='$data[id]' readonly>
                 星期：<span class=\"date\">$data[week]</span>
                 时间：<span class=\"time\">$data[time]</span>
-                状态：<span class=\"orno$data[status]\" data-color=$data[status]></span>
-     
-                
+                状态：<span class=\"orno$data[status]\"></span>
+                    <select name='status'>
+                        <option value='1'>待跟进..</option>
+                        <option value='2'>跟进中..</option>
+                        <option value='3'>已订单..</option>
+                        <option value='4'>客户流失</option>
+                    </select>
+                    <!--引入 JS 控制状态灯颜色 -->
+                    <script src='../js/changeStatus.js'></script>
                 <a href='../admin/adminIndex.php' style='float:right;'>返回首页</a>
             </div>
         </div>
@@ -56,7 +62,7 @@ echo "<form class=\"wrap\" action='updataSend.php' method='post'>
                     </label>
                     <label>
                         <input type='radio' name='from' value='其他'/>其他
-                        </label>                
+                    </label>                
                 </span>
             <script>
             /*JS 控制信息来源 checked*/
@@ -80,14 +86,14 @@ echo "<form class=\"wrap\" action='updataSend.php' method='post'>
                 责任客服：<span class=\"name\">$_SESSION[name]</span>
             </div>
             <div>
-                手机号码 : <input type='text' name=\"phone\" value='$data[phone]'>
+                手机号码 : <input type='text' name=\"phone\" value='$data[phone]' maxlength='11' minlength='11' />
             </div>
             <div>
                 所属团队 : $team
             </div>
 
             <div>
-                所在城市 : <input type='text' name=\"city\" value='$data[location]'>
+                所在城市 : <input type='text' name=\"location\" value='$data[location]'>
             </div>
             <div>
                 楼盘名称：<input type='text' name=\"house\" value='$data[house]'>

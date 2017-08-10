@@ -21,10 +21,10 @@ include '../lgCheck.php';
             echo $_SESSION['uid'];
             ?>
         </span>
-        用户:
+        用 户:
         <span>
-            <?php
-            echo $_SESSION['name'];
+             <?php
+            echo  $_SESSION['name'];
             ?>
         </span>
 
@@ -58,7 +58,7 @@ include '../lgCheck.php';
     if($endPage > $num_rows){
         $endPage = $num_rows;
     }
-    echo '现在页：'.$nowPages.'<br/>'.'开始页'.$startPage.'<br/>'.'结束页'.$endPage.'<br/>'.$pageTotle;
+
     $sql = "select * from user order by id desc limit $startPage, $endPage";
 
 

@@ -60,13 +60,13 @@ echo "<form class=\"wrap\" action='addInfoSend.php' method='post'>
         </div>
         <div class=\"info\">
             <div>
-                客户姓名：<input type='text' name='name'/>
+                客户姓名：<input type='text' name='name' maxlength='12'/>
             </div>
             <div>
                 责任客服：<span class=\"name\">$_SESSION[name]</span>
             </div>
             <div>
-                手机号码 : <input type='text' name=\"phone\">
+                手机号码 : <input type='text' name=\"phone\" maxlength='11' minlength='11'/>
             </div>
             <div>
                 所属团队 : $team
