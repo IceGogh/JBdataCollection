@@ -19,7 +19,7 @@ $id =  $_GET['id'];
 include '../connectAdmin.php';
 $query = mysqli_query($con,"select * from user where id = $id");
 $data = mysqli_fetch_assoc($query);
-$team = substr($_SESSION['uid'], 0 , 1);
+$team = $data['team'];
 echo "<form class=\"wrap\" action='updataSend.php' method='post'>
         <div class=\"item\">
             <div class=\"title\">
@@ -82,14 +82,25 @@ echo "<form class=\"wrap\" action='updataSend.php' method='post'>
             <div>
                 客户姓名：<input type='text' name='name' value='$data[name]'/>
             </div>
+        
             <div>
-                责任客服：<span class=\"name\">$_SESSION[name]</span>
+                责任客服：";
+            //  组长 分配信息给组员 根据不同组长 显示不同的组员
+            include  "../allocation/allot.php";
+
+        echo "
             </div>
+        
+        
             <div>
                 手机号码 : <input type='text' name=\"phone\" value='$data[phone]' maxlength='11' minlength='11' />
             </div>
             <div>
-                所属团队 : $team
+                所属团队 : ";
+
+            include  "../teamTransform/teamTs.php";
+
+        echo "
             </div>
 
             <div>

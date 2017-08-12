@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 include '../connectAdmin.php';
-session_start();
+include "../lgCheck.php";
 ?>
 <html lang="en">
 <head>

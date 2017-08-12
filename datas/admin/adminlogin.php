@@ -8,15 +8,17 @@ include ('../connectAdmin.php');
 $phone = $_POST['phone'];//post获得用户名
 $password = $_POST['password'];//post获得用户密码单值
 if($phone && $password){
-    $sql = "select phone,password,name from adminuser where phone = '$phone' and password = '$password'";
+    $sql = "select * from adminuser where phone = '$phone' and password = '$password'";
 
     $result = mysqli_query($con, $sql);
 
-    $rows = mysqli_num_rows($result);
-    if($rows){
-        $_SESSION['uid'] = $phone;
-        $_SESSION['name'] = mysqli_fetch_assoc($result)['name'];
 
+    if($rows = mysqli_num_rows($result)){
+
+        $_SESSION['uid'] = $phone;
+        $arr = mysqli_fetch_assoc($result);
+        $_SESSION['power'] = $arr['power'];
+        $_SESSION['name'] = $arr['name'];
         header("refresh:0; url=adminIndex.php");
         exit;
     }else{

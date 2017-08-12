@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-session_start();
+include "../lgCheck.php";
 ?>
 <html lang="en">
 <head>
@@ -11,7 +11,8 @@ session_start();
 <body>
 <h2>客户信息添加</h2>
 <?php
-$team = substr($_SESSION['uid'], 0 ,1);
+
+$team = floor($_SESSION['uid']/10);
 echo "<form class=\"wrap\" action='addInfoSend.php' method='post'>
       <h4>
         当前ID：
@@ -69,7 +70,9 @@ echo "<form class=\"wrap\" action='addInfoSend.php' method='post'>
                 手机号码 : <input type='text' name=\"phone\" maxlength='11' minlength='11'/>
             </div>
             <div>
-                所属团队 : $team
+                所属团队 : ";
+                include "../teamTransform/teamTs.php";
+        echo "
             </div>
 
             <div>
@@ -83,7 +86,7 @@ echo "<form class=\"wrap\" action='addInfoSend.php' method='post'>
             </div>
            
             <div>
-                跟进导购：<input type='text' name=\"guide\">
+                跟进导购/经销商客服：<input type='text' name=\"guide\">
             </div>
             <i class=\"clearFl\"></i>
         </div>

@@ -18,13 +18,15 @@ include '../lgCheck.php';
         当前ID：
         <span>
             <?php
+
             echo $_SESSION['uid'];
             ?>
         </span>
         用 户:
         <span>
              <?php
-            echo  $_SESSION['name'];
+             $customer = $_SESSION['name'];
+            echo  $customer;
             ?>
         </span>
 
@@ -35,11 +37,30 @@ include '../lgCheck.php';
 
     <?php
     include "../connectAdmin.php";
+    $team = floor($_SESSION['uid']/10);
+    $power =  $_SESSION['power'];
+
     //  根据 url 参数  若没有参数 取 1
     $nowPages = !empty($_GET['page']) ? $_GET['page'] : 1;
 
+
+    //  根据 登录人员 的权限设置
+    if( $power == 0 ){
+
+        //  全局查看
+        $result = mysqli_query( $con,"SELECT id FROM user");
+
+    }else if( $power == 1 ){
+
+        //  查看所属team的信息
+        $result = mysqli_query( $con,"SELECT id FROM user where team = $team" );
+
+    }else if(  $power == 2 ){
+        //  查看个人所负责的信息
+        $result = mysqli_query( $con,"SELECT id FROM user where customer = '$customer'" );
+    }
+
     //  获取信息总条数
-    $result = mysqli_query( $con,"SELECT id FROM user" );
     $num_rows = mysqli_num_rows( $result );
     $pageTotle =  ceil($num_rows/10);
 
@@ -59,15 +80,38 @@ include '../lgCheck.php';
         $endPage = $num_rows;
     }
 
-    $sql = "select * from user order by id desc limit $startPage, $endPage";
+
+    //  根据 登录人员 的权限设置
+    if( $power == 0 ){
+
+        //  全局查看
+        $sql = "select * from user order by id desc limit $startPage, $endPage";
+
+    }else if( $power == 1 ){
+
+        //  查看所属team的信息
+        $sql = "select * from user  where team = $team order by id desc limit $startPage, $endPage";
+
+    }else if ( $power == 2 ){
+        //  查看个人所负责的信息
+        $sql = "select * from user  where customer = '$customer' order by id desc limit $startPage, $endPage";
+    }
 
 
-    //    echo $sql;
+
+
     $query = mysqli_query($con, $sql);
+    ?>
 
-    echo "<h4>
+    <h4>
         客户信息列表
-        <a href='../addInfo/addInfo.php?id=$_SESSION[uid]' style='float:right;'>添加客户</a>
+    <?php
+    //  根据管理人员ID 是否赋予 [添加用户] 权限
+    include '../poweLv/addInfoButton.php';
+
+
+    echo "
+
     </h4>
     <div class=\"pageSelect\">
         客户信息总条数
@@ -86,13 +130,21 @@ include '../lgCheck.php';
         
             $pageTotle 
         </span>
-        <a href=\"http://localhost/Jiabao0519/datas/admin/adminindex.php\" class='changePage first'>首页</a>
-        <a href=\"http://localhost/Jiabao0519/datas/admin/adminindex.php?page={$prePages}\" class='changePage prePage'>上一页</a>
-        <a href=\"http://localhost/Jiabao0519/datas/admin/adminindex.php?page={$nextPages}\" class='changePage nextPage'>下一页</a>
+        <a href=\"";
+    include "../urlTransf.php";
+    echo "datas/admin/adminindex.php\" class='changePage first'>首页</a>
+        <a href=\"";
+    include "../urlTransf.php";
+    echo "datas/admin/adminindex.php?page={$prePages}\" class='changePage prePage'>上一页</a>
+        <a href=\"";
+    include "../urlTransf.php";
+    echo "datas/admin/adminindex.php?page={$nextPages}\" class='changePage nextPage'>下一页</a>
     </div>";
 
 
     while ($data = mysqli_fetch_assoc($query)){
+
+        $team = $data['team'];
 
         echo "<div class=\"wrap\">
         <div class=\"item\">
@@ -100,11 +152,11 @@ include '../lgCheck.php';
                 编号：<span class=\"number\">$data[id]</span>
                 <span class=\"date\">星期$data[week]</span>
                 时间：<span class=\"time\">$data[time]</span>
-                状态：<span class=\"orno$data[status]\" data-color=$data[status]></span>
-              
-                
-                <a class=\"renew\" href='../updata/updata.php?id=$data[id]'>修改客户资料</a>
-            </div>
+                状态：<span class=\"orno$data[status]\" data-color=$data[status]></span>";
+
+    include "../poweLv/changeInfoButton.php";
+
+    echo "</div>
         </div>
         <div class=\"info\">
             <div>
@@ -118,13 +170,19 @@ include '../lgCheck.php';
             </div>
 
             <div>
-                责任客服：<span class=\"name\">$data[customer]</span>
+                责任客服: <span class=\"name\">$data[customer]</span>
             </div>
             <div>
                 所在城市 : <span class=\"city\">$data[location]</span>
             </div>
             <div>
-                所属团队 : <span class=\"team\">$data[team]</span>
+                所属团队: 
+                <span class=\"team\">";
+                //  根据 工作人员ID值范围 转换成对应中文的 组别
+                include '../teamTransform/teamTs.php';
+        echo "
+                    
+                </span>
             </div>
             
             <div>
@@ -137,7 +195,7 @@ include '../lgCheck.php';
                 IP地址：<span class=\"IP\">$data[IP]</span>
             </div>
             <div>
-                跟进导购：<span class=\"guide\">$data[guide]</span>
+                跟进导购/经销商客服：<span class=\"guide\">$data[guide]</span>
             </div>
             <i class=\"clearFl\"></i>
         </div>
