@@ -7,12 +7,15 @@ $customer = $_POST['customer'];
 $phone = $_POST['phone'];
 $location = $_POST['location'];
 $house = $_POST['house'];
-
-$renew = "update user set status = '$_POST[status]', infoFrom = '$_POST[from]', name = '$name', phone = '$phone', location = '$location' , weico = '$_POST[weico]', customer = '$customer' , house = '$house', guide = '$_POST[guide]' where id = '$_POST[id]'";
+$href= '';
+$time ='';
+$dealer = $_POST['dealer'];
+$renew = "update user set status = '$_POST[status]', infoFrom = '$_POST[from]', name = '$name', phone = '$phone', location = '$location' , weico = '$_POST[weico]', customer = '$customer' , house = '$house', guide = '$_POST[guide]', dealer = '$dealer' where id = '$_POST[id]'";
 $query = mysqli_query($con, $renew);
 if(!$query){
     echo mysqli_error($con);
     echo "<script>alert('修改失败')</script>";
+
 }else{
     echo "<script>alert('修改成功')</script>";
 

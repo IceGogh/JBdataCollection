@@ -8,7 +8,7 @@
 .orno2 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:yellow;}
 .orno3 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:green;}
 .orno4 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:blue;}
-.wrap { width:1160px; margin:20px auto 0; border:1px solid #000; border-bottom: none; background:#777; padding:20px;}
+.wrap { position:relative; width:1160px; margin:20px auto 0; border:1px solid #000; border-bottom: none; background:#777; padding:20px;}
 .wrap div {
   text-indent:.5em;
 }
@@ -83,4 +83,35 @@ h4 > span {
   color:#eee;
 }
 
+.keyin{
+  display:none;
+  width:600px;
+  height:400px;
+  position:absolute;
+  top:100px;
+  left:300px;
+  background: rgb(189, 194, 206);
+
+}
+
+.keyin textarea{
+
+  font-size:18px;
+  width:100%;
+  height:350px;
+  padding:0;
+  margin:0;
+  box-sizing:border-box;
+}
+
+.keyin input[submit]{
+
+}
+.team {
+  margin-right:50px;
+}
+.dealer {
+
+  color: #35b3ff;
+}
 

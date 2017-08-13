@@ -21,7 +21,7 @@ if( $day == 0 ){
     $to = "4535292@qq.com, 250219627@qq.com";
     $team = 100;
     $customer = '肖右生';
-        }else{
+}else{
     $to = "250219627@qq.com";
     $team = 200;
     $customer = '柴慧';

@@ -44,8 +44,11 @@ if( $_SESSION['uid'] == 1000){
     echo
     ">谢蓉</option>
                                     </select>";
+}else if( $_SESSION['uid'] > 3000){
+    echo "<input type='text' name='customer' value='$data[customer]' readonly/>";
+
 }else{
-    echo $data['customer'];
+    echo "<input type='text' name='customer' value='$data[customer]' readonly/>";
 }
 
 

@@ -1,7 +1,7 @@
 
 
 $(function(){
-    var statusElm = $('.title span:last-of-type');
+    var statusElm = $('.title span:nth-of-type(3)');
     var cls = statusElm.attr('class');
     var oldNub = cls[4];
     //  初始 status 状态灯及状态说明select选框

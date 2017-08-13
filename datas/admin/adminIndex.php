@@ -58,9 +58,15 @@ include '../lgCheck.php';
     }else if(  $power == 2 ){
         //  查看个人所负责的信息
         $result = mysqli_query( $con,"SELECT id FROM user where customer = '$customer'" );
+    }else if( $power == 4 ){
+        //  经销商
+        $result = mysqli_query( $con,"SELECT id FROM user where dealer = '$team'" );
     }
 
-    //  获取信息总条数
+
+
+
+    //  获取信息总条数;
     $num_rows = mysqli_num_rows( $result );
     $pageTotle =  ceil($num_rows/10);
 
@@ -95,6 +101,9 @@ include '../lgCheck.php';
     }else if ( $power == 2 ){
         //  查看个人所负责的信息
         $sql = "select * from user  where customer = '$customer' order by id desc limit $startPage, $endPage";
+    }else if( $power == 4 ){
+        // 经销商帐号权限
+        $sql = "select * from user  where dealer = '$team' order by id desc limit $startPage, $endPage";
     }
 
 
@@ -108,7 +117,6 @@ include '../lgCheck.php';
     <?php
     //  根据管理人员ID 是否赋予 [添加用户] 权限
     include '../poweLv/addInfoButton.php';
-
 
     echo "
 
@@ -127,7 +135,7 @@ include '../lgCheck.php';
              $nowPages
         
         /
-        
+     
             $pageTotle 
         </span>
         <a href=\"";
@@ -155,6 +163,10 @@ include '../lgCheck.php';
                 状态：<span class=\"orno$data[status]\" data-color=$data[status]></span>";
 
     include "../poweLv/changeInfoButton.php";
+        $urlencodename = urlencode($data['name']);
+
+    //  根据管理人员ID 是否赋予 [备注] 权限
+    include '../poweLv/commentButton.php';
 
     echo "</div>
         </div>
@@ -176,13 +188,10 @@ include '../lgCheck.php';
                 所在城市 : <span class=\"city\">$data[location]</span>
             </div>
             <div>
-                所属团队: 
-                <span class=\"team\">";
+                所属团队: ";
                 //  根据 工作人员ID值范围 转换成对应中文的 组别
                 include '../teamTransform/teamTs.php';
-        echo "
-                    
-                </span>
+        echo "   
             </div>
             
             <div>
@@ -206,14 +215,13 @@ include '../lgCheck.php';
                     <a href='$data[href]'>$data[href]</a>
                 </span>
             </div>
-            
-        
         </div>
-
     </div>";
     }
 
     ?>
 </div>
 </body>
+<!--页面(数据)加载完毕后 根据是否存在data-dealer值 中文显示经销商名称 -->
+<script src="../js/dealer.js"></script>
 </html>

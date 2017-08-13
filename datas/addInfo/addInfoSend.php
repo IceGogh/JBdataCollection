@@ -9,7 +9,7 @@ if(!$_POST['from'] || !$_POST['name'] || !$_POST['phone']){
     $time = date('Y-m-d H:i:s');
     $weekArray = array("日", "一", "二", "三", "四", "五", "六");
     $week = $weekArray[date('w')];
-    $team =  substr($_SESSION['uid'],0,1);
+    $team =  floor($_SESSION['uid']/10);
 
     $add = "insert into user (name, phone, location, house, time, status, infoFrom, team, week, weico, customer, guide) value ('$_POST[name]', '$_POST[phone]', '$_POST[city]', '$_POST[house]', '$time', '2' , '$_POST[from]', '$team', '$week', '$_POST[weico]', '$_SESSION[name]', '$_POST[guide]')";
 
