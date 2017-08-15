@@ -1,3 +1,3 @@
 <?php
-echo "http://localhost/Jiabao0519/";
+echo "http://www.siemensgabor.com";
 ?>

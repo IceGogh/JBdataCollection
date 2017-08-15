@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect("localhost" , "root" , "Novellus2010");//链接数据库
+$con = mysqli_connect("http://120.24.83.142:999" , "test" , "Novellus2010");//链接数据库
 if(!$con){
     die("can't connect");
 }else{

@@ -8,7 +8,7 @@
 .orno2 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:yellow;}
 .orno3 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:green;}
 .orno4 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:blue;}
-.wrap { position:relative; width:1160px; margin:20px auto 0; border:1px solid #000; border-bottom: none; background:#777; padding:20px;}
+.wrap { position:relative; width:1160px; margin:20px auto 0; border:1px solid #000; border-bottom: none; background:#777; padding:0 20px 5px ;}
 .wrap div {
   text-indent:.5em;
 }
@@ -113,5 +113,20 @@ h4 > span {
 .dealer {
 
   color: #35b3ff;
+}
+.hiddeInfo{
+  height:36px;
+  overflow: hidden;
+}
+.hiddeInfo2 {
+  display: none;
+}
+.comment p {
+  margin:0;
+  height: 26px;
+  line-height:26px;
+}
+.comment span {
+  float:right;
 }
 

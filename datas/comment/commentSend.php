@@ -5,7 +5,7 @@ date_default_timezone_set("Asia/Shanghai");
 $time = date("Y-h-d H:i:s");
 
 // 新加 备注
-$newCommentWords = '<p>'.$_POST['comment'].'</p>'.$time.' by: '.$_SESSION['name'].'<hr/>';
+$newCommentWords = '<p>'.$_POST['comment'].'</p>'.'<span>'.$time.' by: '.$_SESSION['name'].'</span>'.'<hr/>';
 $oldComment = "select comment from user where id = $_GET[id]";
 $result = mysqli_query($con, $oldComment);
 $newCommentWords .= mysqli_fetch_assoc($result)['comment'];

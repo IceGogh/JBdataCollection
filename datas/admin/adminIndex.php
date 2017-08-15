@@ -168,9 +168,18 @@ include '../lgCheck.php';
     //  根据管理人员ID 是否赋予 [备注] 权限
     include '../poweLv/commentButton.php';
 
+    $statusNote = Array('', '未跟进', '跟进中', '已成单', '客户流失');
+    echo $statusNote[$data['status']];
+
+    $commentNew = stripos($data['comment'],'<hr/>');
+    $commentNew2 = substr($data['comment'],0,$commentNew);
+    if($commentNew2 == ''){
+        $commentNew2 = '[暂无备注]';
+    }
+
     echo "</div>
         </div>
-        <div class=\"info\">
+        <div class=\"info hiddeInfo\">
             <div>
                 客户姓名：<span class=\"name\">$data[name]</span>
             </div>
@@ -208,13 +217,18 @@ include '../lgCheck.php';
             </div>
             <i class=\"clearFl\"></i>
         </div>
-        <div class=\"from\">
+        <div class=\"from hiddeInfo2\">
             <div>
                 访问网页地址：
                 <span class=\"href\">
                     <a href='$data[href]'>$data[href]</a>
                 </span>
             </div>
+        </div>
+        <div class='comment'>
+            
+                最新备注 : $commentNew2
+                <i class='clearFl'></i>
         </div>
     </div>";
     }
@@ -224,4 +238,5 @@ include '../lgCheck.php';
 </body>
 <!--页面(数据)加载完毕后 根据是否存在data-dealer值 中文显示经销商名称 -->
 <script src="../js/dealer.js"></script>
+<script src="../js/hiddenInfo.js"></script>
 </html>

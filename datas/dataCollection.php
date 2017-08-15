@@ -18,11 +18,11 @@ echo '<br/>'.$week.'<br/>';
 
 //  同时发送email到QQ邮箱 同时做好分组
 if( $day == 0 ){
-    $to = "4535292@qq.com, 250219627@qq.com";
+    $to = "4535292@qq.com, 45362911@qq.com,58003840@qq.com";
     $team = 100;
     $customer = '肖右生';
 }else{
-    $to = "250219627@qq.com";
+    $to = "4535292@qq.com, 420116301@qq.com,58003840@qq.com";
     $team = 200;
     $customer = '柴慧';
 }
