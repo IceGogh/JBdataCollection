@@ -22,11 +22,11 @@ if(!$query){
     if($_SESSION['uid'] == 1000 ){
         // 是否为 曾漂亮
         if($customer == '曾漂亮'){
-            $to = "249390602@qq.com, 4535292@qq.com";
+            $to = "249390602@qq.com";
             include '../sendMail.php';
         // 是否为 涂品品
         }else if($customer == '涂品品'){
-            $to = "4535292@qq.com, 1016769871@qq.com";
+            $to = "1016769871@qq.com";
             include '../sendMail.php';
 
         }
@@ -34,8 +34,13 @@ if(!$query){
     // 判定是否为 柴慧组
     }else if($_SESSION['uid'] == 2000){
         if($customer == '谢蓉'){
-            $to = "4535292@qq.com, 971722844@qq.com";
+            $to = " 971722844@qq.com";
             include '../sendMail.php';
+
+        }else if($customer == '彭靖'){
+//            $to = "1016769871@qq.com";
+//            include '../sendMail.php';
+
         }
     }
 }

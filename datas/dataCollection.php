@@ -14,7 +14,7 @@ $day = date('d')%2;
 //  星期
 $weekArray = array("日", "一", "二", "三", "四", "五", "六");
 $week = $weekArray[date('w')];
-echo '<br/>'.$week.'<br/>';
+
 
 //  同时发送email到QQ邮箱 同时做好分组
 if( $day == 0 ){
@@ -34,7 +34,7 @@ if (preg_match("/^[\x80-\xff]{6,30}$/", $name)){
     if(!$query){
         die('Error: ' . mysqli_error($con));
     }else{
-        echo "提交成功";
+        echo "报名成功!!";
 
     include 'sendMail.php';
 

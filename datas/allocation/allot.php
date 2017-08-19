@@ -28,21 +28,30 @@ if( $_SESSION['uid'] == 1000){
 }else if ( $_SESSION['uid'] == 2000){
     echo
     "<select name='customer'>
-                                    <option value='柴慧'";
+    <option value='柴慧'";
     if($data['customer'] == '柴慧'){
         echo "selected";
     }
     echo
     ">柴慧</option>";
 
-
     echo
-    "<option value='谢蓉'";
+    "
+    <option value='谢蓉'";
     if($data['customer'] == '谢蓉'){
         echo "selected";
     }
     echo
-    ">谢蓉</option>
+    ">谢蓉</option>";
+
+
+    echo
+    "<option value='彭靖'";
+    if($data['customer'] == '彭靖'){
+        echo "selected";
+    }
+    echo
+    ">彭靖</option>
                                     </select>";
 }else if( $_SESSION['uid'] > 3000){
     echo "<input type='text' name='customer' value='$data[customer]' readonly/>";
