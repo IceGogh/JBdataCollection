@@ -176,76 +176,77 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
         }
     }
 
+    if( $_SESSION['uid'] < 3000){
+        echo "<form class=\"selectCheck\" style=\"height:50px; border:1px #eee solid;\" action=\"adminIndex.php\" method=\"post\">";
 
-    ?>
 
-    <form class="selectCheck" style="height:50px; border:1px #eee solid;" action="adminIndex.php" method="post">
-    <?php
-       if( $_SESSION['uid'] < 1000 ){
-        echo "<i>组别</i>
+        if( $_SESSION['uid'] < 1000 ){
+            echo "<i>组别</i>
         <select class=\"selectTeam\" name=\"F-team\">
             <option value=\" \">[不指定组]</option>
             <option value=\"100\">肖右生组</option>
             <option value=\"200\">柴慧组</option>
         </select>";
-       }else if ($_SESSION['uid'] == 1000 ){
-           echo "<i>组别</i>
+        }else if ($_SESSION['uid'] == 1000 ){
+            echo "<i>组别</i>
             <select class=\"selectTeam\" name=\"F-team\">
                
                 <option value=\"100\">肖右生组</option>
               
             </select>";
-       }else if ( $_SESSION['uid'] == 2000){
-           echo "<i>组别</i>
+        }else if ( $_SESSION['uid'] == 2000){
+            echo "<i>组别</i>
             <select class=\"selectTeam\" name=\"F-team\">
             
                 <option value=\"200\">柴慧组</option>
               
             </select>";
-       }
-    ?>
-
-        <i>客服</i>
-        <select class="selectCustomer" name="F-customer">
-            <option value=" ">[不指定客服]</option>
+        }
+        echo " <i>客服</i>
+        <select class=\"selectCustomer\" name=\"F-customer\">
+            <option value=\" \">[不指定客服]</option>
         </select>
 
 
         <i>状态</i>
 
-        <select class="selectStatus" name="F-status">
-            <option value=" ">[不指定状态]</option>
-            <option value="1">待跟进..</option>
-            <option value="2">跟进中..</option>
-            <option value="3">已订单..</option>
-            <option value="4">客户流失</option>
+        <select class=\"selectStatus\" name=\"F-status\">
+            <option value=\" \">[不指定状态]</option>
+            <option value=\"1\">待跟进..</option>
+            <option value=\"2\">跟进中..</option>
+            <option value=\"3\">已订单..</option>
+            <option value=\"4\">客户流失</option>
 
         </select>
 
         <i>来源</i>
-        <select class="selectFrom" name="F-from">
-            <option value=" ">[不指定来源]</option>
-            <option value="官网">官网</option>
-            <option value="天猫">天猫</option>
-            <option value="淘宝">淘宝</option>
-            <option value="京东">京东</option>
-            <option value="400电话">400电话</option>
-            <option value="其他">其他</option>
+        <select class=\"selectFrom\" name=\"F-from\">
+            <option value=\" \">[不指定来源]</option>
+            <option value=\"官网\">官网</option>
+            <option value=\"天猫\">天猫</option>
+            <option value=\"淘宝\">淘宝</option>
+            <option value=\"京东\">京东</option>
+            <option value=\"400电话\">400电话</option>
+            <option value=\"其他\">其他</option>
         </select>
 
-        <input type="submit" value="查询" />
+        <input type=\"submit\" value=\"查询\" />
 
-        <input type="button" class="clearSelect" style="display:inline-block; width:120px; float:right; margin-right:20px;" value="清空查询条件"/>
+        <input type=\"button\" class=\"clearSelect\" style=\"display:inline-block; width:120px; float:right; margin-right:20px;\" value=\"清空查询条件\"/>
     </form>
 
 
     <!--高级查询, select框 前端JS 控制-->
-    <script src="../js/selectCheck.js"></script>
+    <script src=\"../js/selectCheck.js\"></script>";
+
+    }
 
 
 
 
 
+
+    ?>
     <!-- 根据登录的不同权限用户 加载显示不同的客户信息列表-->
     <h4>
         客户信息列表
