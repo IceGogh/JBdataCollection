@@ -134,18 +134,13 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
             // 若 team 与 customer 两个中任意一个不为空
             if( @$_SESSION['f_teamWord'] != ' ' || @$_SESSION['f_customerWord'] != ' '){
 
-                // 权限判断 是否有 where前置
-                if( $_SESSION['power'] == 0 ){
-
-                    $_SESSION['f_statusWord'] = ' where status = "'.$_SESSION['f_status'].'"';
-                }else{
-                    $_SESSION['f_statusWord'] = ' and status = "'.$_SESSION['f_status'].'"';
-                }
-
+                $_SESSION['f_statusWord'] = ' and status = "'.$_SESSION['f_status'].'"';
 
             // 若 team 与 customer 两个都为空
             }else{
+
                 $_SESSION['f_statusWord'] = ' where status = "'.$_SESSION['f_status'].'"';
+
             }
         }
     }
@@ -165,13 +160,7 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
             // 若前面 team / customer / status 中 任意一个不为空
             if( @$_SESSION['f_teamWord'] != ' ' || @$_SESSION['f_customerWord'] != ' ' || @$_SESSION['f_statusWord'] != ' '){
 
-                // 权限判断 是否有 where前置
-                if( $_SESSION['power'] == 0){
-
-                    $_SESSION['f_fromWord'] = ' where infoFrom = "'.$_SESSION['f_from'].'"';
-                }else{
-                    $_SESSION['f_fromWord'] = ' and infoFrom = "'.$_SESSION['f_from'].'"';
-                }
+                $_SESSION['f_fromWord'] = ' and infoFrom = "'.$_SESSION['f_from'].'"';
 
             //  若前面 team / customer / status 全部都为空
             }else{
@@ -260,7 +249,6 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
     //  根据登录角色不同加载不同数据
     include 'loadDataList.php';
 
-    echo @$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'];
     ?>
 
     </h4>

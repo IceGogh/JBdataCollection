@@ -4,6 +4,7 @@
   background:#eee;
 }
 .clearFl { display:block; width:0; height:0; font-size:0; clear:both;}
+
 .orno1 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:red;}
 .orno2 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:yellow;}
 .orno3 { display:inline-block; width:15px; height:15px; border-radius: 50%; background:green;}
@@ -129,4 +130,20 @@ h4 > span {
 .comment span {
   float:right;
 }
+.selectCheck > select {
+  line-height: 26px;
+  height: 26px;
 
+}
+.selectCheck > input {
+  display: inline-block;
+  float: right;
+  height: 26px;
+  line-height:26px;
+  padding: 0;
+  width:50px;
+  text-align:center;
+}
+.selectCheck > i {
+  margin-left: 10px;
+}
