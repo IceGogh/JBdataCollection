@@ -33,16 +33,6 @@ if( $_SESSION['uid'] == 1000){
     echo
     ">肖玉洁</option>";
 
-    echo
-    "<option value='胡雨银'";
-    if($data['customer'] == '胡雨银'){
-        echo "selected";
-    }
-    echo
-    ">胡雨银</option>";
-
-
-
 
     echo "
     </select>";
@@ -56,7 +46,6 @@ if( $_SESSION['uid'] == 1000){
     echo
     ">柴慧</option>";
 
-
     echo
     "<option value='谢蓉'";
     if($data['customer'] == '谢蓉'){
@@ -65,7 +54,6 @@ if( $_SESSION['uid'] == 1000){
     echo
     ">谢蓉</option>";
 
-
     echo
     "<option value='彭靖'";
     if($data['customer'] == '彭靖'){
@@ -73,8 +61,6 @@ if( $_SESSION['uid'] == 1000){
     }
     echo
     ">彭靖</option>";
-
-
 
     echo
     "<option value='黄丽'";
