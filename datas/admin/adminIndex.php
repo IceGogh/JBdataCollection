@@ -43,8 +43,11 @@ include '../lgCheck.php';
     $team = floor($_SESSION['uid']/10);
     include "../connectAdmin.php";
 
-    //  初始化 sessionWord
-    $_SESSION['f_teamWord'] = $_SESSION['f_customerWord'] = $_SESSION['f_statusWord'] = $_SESSION['f_fromWord'] = ' ';
+
+    //  初始化 sessionWord  判断是否为 翻页方式 重载  如果是 则 不重置 sessionWord值
+    if( !$_SERVER["QUERY_STRING"] ){
+        $_SESSION['f_teamWord'] = $_SESSION['f_customerWord'] = $_SESSION['f_statusWord'] = $_SESSION['f_fromWord'] = ' ';
+    }
 
 
 
@@ -74,6 +77,10 @@ if( $_SESSION['power'] == 0){
 }else if( $_SESSION['power'] == 1 ){
 
     $_SESSION['f_teamWord'] = " where team = ".$team;
+
+}else if( $_SESSION['power'] == 2 ){
+
+    $_SESSION['f_customerWord'] = ' where customer = "'.$customer.'"';
 
 }
 
@@ -248,7 +255,6 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
     include '../poweLv/addInfoButton.php';
     //  根据登录角色不同加载不同数据
     include 'loadDataList.php';
-
     ?>
 
     </h4>
