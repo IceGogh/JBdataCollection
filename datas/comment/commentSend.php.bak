@@ -2,7 +2,7 @@
 include '../lgCheck.php';
 include '../connectAdmin.php';
 date_default_timezone_set("Asia/Shanghai");
-$time = date("Y-m-d H:i:s");
+$time = date("Y-h-d H:i:s");
 
 // 新加 备注
 $newCommentWords = '<p>'.$_POST['comment'].'</p>'.'<span>'.$time.' by: '.$_SESSION['name'].'</span>'.'<hr/>';

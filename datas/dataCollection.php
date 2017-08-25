@@ -22,10 +22,14 @@ if( $day == 0 ){
     $team = 100;
     $customer = '肖右生';
 }else{
-    $to = "4535292@qq.com, 420116301@qq.com,58003840@qq.com";
+
+    $to = "4535292@qq.com, 58003840@qq.com, 420116301@qq.com";
     $team = 200;
     $customer = '柴慧';
 }
+
+
+
 // 数据拦截验证
     // $name 为中文名称
 if (preg_match("/^[\x80-\xff]{6,30}$/", $name)){
@@ -34,12 +38,12 @@ if (preg_match("/^[\x80-\xff]{6,30}$/", $name)){
     if(!$query){
         die('Error: ' . mysqli_error($con));
     }else{
-        echo "报名成功!!";
+        echo "提交成功";
 
     include 'sendMail.php';
 
         // 数据成功传输后  生成JS 关闭get请求页面
-        echo "<script>window.close('sendInfo');</script>";
+       echo "<script>window.close('sendInfo');</script>";
 
     }
 }

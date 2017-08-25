@@ -14,16 +14,6 @@ include '../lgCheck.php';
 <div class="bodyinner">
 
     <h2>嘉宝网络客户信息系统</h2>
-    <?php
-    echo @$_POST['F-team'];
-    echo '客服： '.@$_POST['F-customer'];
-    echo '状态： '.@$_POST['F-status'];
-    echo ' 来源： '.@$_POST['F-from'];
-    echo ' 来源： '.@$_POST['f_status'];
-
-    ?>
-
-    <!--显示用户名title部分-->
     <h4>
         当前ID：
         <span>
@@ -34,7 +24,7 @@ include '../lgCheck.php';
         </span>
         用 户:
         <span>
-            <?php
+             <?php
              $customer = $_SESSION['name'];
             echo  $customer;
             ?>
@@ -45,162 +35,92 @@ include '../lgCheck.php';
         <span class="closeLg">退出系统</span>
     </h4>
 
-
-
-    <!--高级筛选-->
     <?php
     include "../connectAdmin.php";
+    $team = floor($_SESSION['uid']/10);
+    $power =  $_SESSION['power'];
+
+    //  根据 url 参数  若没有参数 取 1
+    $nowPages = !empty($_GET['page']) ? $_GET['page'] : 1;
+
+
+    //  根据 登录人员 的权限设置
+    if( $power == 0 ){
+
+        //  全局查看
+        $result = mysqli_query( $con,"SELECT id FROM user");
+
+    }else if( $power == 1 ){
+
+        //  查看所属team的信息
+        $result = mysqli_query( $con,"SELECT id FROM user where team = $team" );
+
+    }else if(  $power == 2 ){
+        //  查看个人所负责的信息
+        $result = mysqli_query( $con,"SELECT id FROM user where customer = '$customer'" );
+    }else if( $power == 4 ){
+        //  经销商
+        $result = mysqli_query( $con,"SELECT id FROM user where dealer = '$team'" );
+    }
+
+
+
+
+    //  获取信息总条数;
+    $num_rows = mysqli_num_rows( $result );
+    $pageTotle =  ceil($num_rows/10);
+
+    $prePages = $nowPages - 1;
+    if( $prePages < 1){
+        $prePages = 1;
+    }
+    $nextPages = $nowPages + 1;
+    if( $nextPages > $pageTotle){
+        $nextPages = $pageTotle;
+    }
+    $showPage = 10;
+    $startPage = $nowPages * $showPage - $showPage;
+    $startPageA = $startPage + 1;
+    $endPage = $nowPages * $showPage;
+    if($endPage > $num_rows){
+        $endPage = $num_rows;
+    }
+
+
+    //  根据 登录人员 的权限设置
+    if( $power == 0 ){
+
+        //  全局查看
+        $sql = "select * from user order by id desc limit $startPage, $endPage";
+
+    }else if( $power == 1 ){
+
+        //  查看所属team的信息
+        $sql = "select * from user  where team = $team order by id desc limit $startPage, $endPage";
+
+    }else if ( $power == 2 ){
+        //  查看个人所负责的信息
+        $sql = "select * from user  where customer = '$customer' order by id desc limit $startPage, $endPage";
+    }else if( $power == 4 ){
+        // 经销商帐号权限
+        $sql = "select * from user  where dealer = '$team' order by id desc limit $startPage, $endPage";
+    }
+
+
+
+
+    $query = mysqli_query($con, $sql);
     ?>
 
-    <form class="selectCheck" style="height:50px; border:1px #eee solid;" action="adminIndex.php" method="post">
-         <i>组别</i>
-        <select class="selectTeam" name="F-team">
-            <option value="" <?php if( @$_POST['F-team'] == null){ echo 'selected="selected"';}?>>[不指定组]</option>
-            <option value="100" <?php if( @$_POST['F-team'] == 100){ echo 'selected="selected"';}?>>肖右生组</option>
-            <option value="200" <?php if( @$_POST['F-team'] == 200){ echo 'selected="selected"';}?>>柴慧组</option>
-        </select>
-        <i>客服</i>
-        <select class="selectCustomer" name="F-customer">
-            <option value="">[不指定客服]</option>
-    <?php
-        if(@$_POST['F-team'] == 100){
-            echo '<option value="肖右生">肖右生</option>
-                <option value="曾漂亮">曾漂亮</option>
-                <option value="涂品品">涂品品</option>';
-        }else if(@$_POST['F-team'] == 200){
-            echo '<option value="柴慧">柴慧</option>
-                <option value="谢蓉">谢蓉</option>
-                <option value="彭靖">彭靖</option>';
-        }
-    ?>
-        </select>
-
-
-        <!-- 根据选定组 JS控制加载不同客服-->
-        <?php
-        /* 若选择 客服 则传值 PHP变量保存到 JS 变量 fcust */
-        if(@$_POST['F-customer']){
-            echo '<script>var fcust = "'.$_POST['F-customer'].'" </script>';
-        }else{
-        /* 若没有选择客服 JS 变量 fcust 为空 */
-            echo '<script>var fcust = "";</script>';
-        }
-
-
-
-
-
-
-
-        /*  高级选择  选中组 */
-        if( @$_POST['F-team']){
-            $f_team = ' where team = '.@$_POST['F-team'];
-        }else{
-            $f_team ='';
-        }
-
-        /*  高级选择  选中客服 */
-        if( @$_POST['F-customer']){
-            /* 若选中客服 清空 选中组的条件*/
-            $f_team ='';
-            $f_customer = ' where customer = "'.@$_POST['F-customer'].'"';
-        }else{
-            $f_customer ='';
-        }
-
-        /* 高级选择 选中客户状态 status*/
-
-        if( @$_POST['F-status']){
-
-            //  若高级选择选中 组别 或者 客服
-            if( @$_POST['F-team'] || @$_POST['F-customer']){
-                $f_status = ' and status = '.@$_POST['F-status'];
-            }else{
-                $f_status = ' where status = '.@$_POST['F-status'];
-            }
-            /* JS 传值*/
-            echo '<script>var fstatus = "'.$_POST['F-status'].'"</script>';
-        }else{
-            /*  若 未选 客户状态 状态值为 空*/
-            $f_status = '';
-            echo '<script>var fstatus = "";</script>';
-        }
-
-
-        /* 高级选择  选中来源渠道*/
-        if( @$_POST['F-from']){
-
-            // 若 前面有设置搜索条件
-            if( @$_POST['F-team'] || @$_POST['F-customer'] || @$_POST['F-status']){
-                $f_from = ' and infoFrom = "'.$_POST['F-from'].'"';
-
-            }else{
-
-                $f_from = ' where infoFrom = "'.$_POST['F-from'].'"';
-            }
-            /* 利用 H5 localStorage 缓存 使刷新页面后 select 默认选中之前的*/
-
-        }else{
-            //
-            $f_from = '';
-        }
-        echo $f_from;
-        ?>
-
-        <i>状态</i>
-
-        <select name="F-status">
-            <option value="">[不指定状态]</option>
-            <option value="1">待跟进..</option>
-            <option value="2">跟进中..</option>
-            <option value="3">已订单..</option>
-            <option value="4">客户流失</option>
-
-        </select>
-
-        <i>来源</i>
-        <select name="F-from">
-            <option value="">[不指定来源]</option>
-            <option value="官网">官网</option>
-            <option value="天猫">天猫</option>
-            <option value="淘宝">淘宝</option>
-            <option value="京东">京东</option>
-            <option value="400电话">400电话</option>
-            <option value="其他">其他</option>
-        </select>
-
-        <input type="submit" value="查询" />
-
-    </form>
-
-    <!--高级查询, select框 前端JS 控制-->
-    <script src="../js/selectCheck.js"></script>
-
-
-
-
-
-    <!-- 根据登录的不同权限用户 加载显示不同的客户信息列表-->
     <h4>
         客户信息列表
-
     <?php
-
     //  根据管理人员ID 是否赋予 [添加用户] 权限
     include '../poweLv/addInfoButton.php';
-    //  根据登录角色不同加载不同数据
-    include 'loadDataList.php';
-    ?>
+
+    echo "
 
     </h4>
-
-
-
-
-
-
-    <?php
-    echo "
     <div class=\"pageSelect\">
         客户信息总条数
             <span>

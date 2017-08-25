@@ -44,8 +44,8 @@ if(!$query){
             include '../sendMail.php';
 
         }else if($customer == '黄丽'){
-            $to = "1219181721@qq.com";
-            include '../sendMail.php';
+//            $to = "1219181721@qq.com";
+//            include '../sendMail.php';
         }
     }
 }

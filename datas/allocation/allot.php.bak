@@ -2,7 +2,7 @@
 if( $_SESSION['uid'] == 1000){
     echo
     "<select name='customer'>
-    <option value='肖右生'";
+                                    <option value='肖右生'";
     if($data['customer'] == '肖右生'){
         echo "selected";
     }
@@ -23,27 +23,27 @@ if( $_SESSION['uid'] == 1000){
         echo "selected";
     }
     echo
-    ">涂品品</option>";
-
+    ">涂品品</option";
+    
     echo
     "<option value='肖玉洁'";
     if($data['customer'] == '肖玉洁'){
         echo "selected";
     }
     echo
-    ">肖玉洁</option>";
-
+    ">肖玉洁</option";
+    
     echo
     "<option value='胡雨银'";
     if($data['customer'] == '胡雨银'){
         echo "selected";
     }
     echo
-    ">胡雨银</option>";
-
-
-
-
+    ">胡雨银</option";
+    
+    
+    
+    
     echo "
     </select>";
 }else if ( $_SESSION['uid'] == 2000){
@@ -64,8 +64,8 @@ if( $_SESSION['uid'] == 1000){
     }
     echo
     ">谢蓉</option>";
-
-
+    
+    
     echo
     "<option value='彭靖'";
     if($data['customer'] == '彭靖'){
@@ -73,9 +73,9 @@ if( $_SESSION['uid'] == 1000){
     }
     echo
     ">彭靖</option>";
-
-
-
+    
+    
+    
     echo
     "<option value='黄丽'";
     if($data['customer'] == '黄丽'){
@@ -83,8 +83,8 @@ if( $_SESSION['uid'] == 1000){
     }
     echo
     ">黄丽</option>";
-
-
+    
+    
     echo
     "</select>";
 }else if( $_SESSION['uid'] > 3000){

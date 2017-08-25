@@ -8,7 +8,7 @@ $(function(){
             type : 'post',
             success : function(data){
                 alert('注销成功!');
-                window.location.href = 'http://localhost/Jiabao0519/datas/admin/checkIn.php';
+                window.location.href = 'http://www.siemensgabor.com/datas/admin/checkIn.php';
             }
         })
     })

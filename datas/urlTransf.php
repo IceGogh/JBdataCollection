@@ -1,3 +1,3 @@
 <?php
-echo "http://www.siemensgabor.com";
+echo "http://www.siemensgabor.com/";
 ?>

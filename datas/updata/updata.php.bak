@@ -149,7 +149,7 @@ echo
                 
             </div>
             <div>
-                客户姓名：<input type='text' name='name' value='$data[name]'/>
+                客户姓名：<input type='text' style='color:#fff' name='name' value='$data[name]'/>
             </div>
         
             <div>

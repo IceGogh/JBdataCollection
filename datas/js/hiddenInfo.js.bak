@@ -9,6 +9,6 @@ $(function(){
         // 展开点击的信息
         $(this)
            .find('.info').removeClass('hiddeInfo')
-           .next('.from').removeClass('hiddeInfo2')
+           .find('.from').removeClass('hiddeInfo2')
     })
 });
