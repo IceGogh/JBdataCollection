@@ -1,5 +1,31 @@
 $(function(){
 
+    /* 选择时间 保存时间起 - 止点*/
+
+    $('#J-xl').val(sessionStorage.getItem('timeStart'));
+    $('#J-xl-3').val(sessionStorage.getItem('timeEnd'));
+
+    SelectTime($('#J-xl'));
+    SelectTime($('#J-xl-3'));
+
+    function SelectTime(elm){
+        elm.on('blur', function(){
+            setTimeout(function(){
+                sessionStorage.setItem( elm.attr('name'), elm.val());
+
+                if(sessionStorage.getItem('timeEnd') < sessionStorage.getItem('timeStart')){
+                    $('#J-xl').css({borderColor: 'red'});
+                    $('#J-xl-3').css({borderColor: 'red'});
+                    $('.timeErr').css({visibility: 'visible'})
+                }else{
+                    $('#J-xl').css({borderColor: '#eee'});
+                    $('#J-xl-3').css({borderColor: '#eee'});
+                    $('.timeErr').css({visibility: 'hidden'})
+                }
+            },500);
+        })
+    }
+
     showCustomerSelectForm();
 
     $('.selectTeam').on('change', function(){
@@ -71,16 +97,18 @@ $(function(){
         setSelectItem(Custer);
         setSelectItem(statusOp);
         setSelectItem(fromOp);
-
-
     }
 
     $('.clearSelect').on('click', function(){
+        sessionStorage.setItem("timeStart", " ");
+        sessionStorage.setItem("timeEnd", " ");
         sessionStorage.setItem("F-team", " ");
         sessionStorage.setItem("F-customer", " ");
         sessionStorage.setItem("F-status", " ");
         sessionStorage.setItem("F-from", " ");
         $('select option').removeAttr('selected');
-    })
+        $('#J-xl').val(' ');
+        $('#J-xl-3').val(' ');
+    });
 
 });
