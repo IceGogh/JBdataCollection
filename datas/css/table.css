@@ -1,6 +1,8 @@
+body { background: #000;}
 .bodyinner {
   width:1200px;
   margin:0 auto;
+  padding: 0 30px;
   background:#eee;
 }
 .clearFl { display:block; width:0; height:0; font-size:0; clear:both;}
