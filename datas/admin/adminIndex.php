@@ -9,6 +9,8 @@ include '../lgCheck.php';
     <link href="../css/table.css" rel="stylesheet"/>
     <script src="../../js/jquery.min.js"></script>
     <script src="../js/closeLg.js"></script>
+    <!--日历插件-->
+    <script src="../js/laydate.dev.js"></script>
 </head>
 <body>
 <div class="bodyinner">
@@ -46,7 +48,7 @@ include '../lgCheck.php';
 
     //  初始化 sessionWord  判断是否为 翻页方式 重载  如果是 则 不重置 sessionWord值
     if( !$_SERVER["QUERY_STRING"] ){
-        $_SESSION['f_teamWord'] = $_SESSION['f_customerWord'] = $_SESSION['f_statusWord'] = $_SESSION['f_fromWord'] = ' ';
+        $_SESSION['timeStartWord'] = $_SESSION['timeEndWord'] = $_SESSION['f_teamWord'] = $_SESSION['f_customerWord'] = $_SESSION['f_statusWord'] = $_SESSION['f_fromWord'] = ' ';
     }
 
 
@@ -123,9 +125,6 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
 }
 
 
-
-
-
     /* 高级选择 选中客户状态 status*/
     if( @$_POST['F-status'] ){
 
@@ -176,12 +175,46 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
         }
     }
 
+    /* 高级选择 选中起 - 止时间*/
+    if(@$_POST['timeStart'] || @$_POST['timeEnd']){
+        $_SESSION['timeStart'] = @$_POST['timeStart'];
+        $_SESSION['timeEnd'] = @$_POST['timeEnd'];
+
+        // 若选择时间为空
+        if ( $_SESSION['timeStart'] == " " || $_SESSION['timeEnd'] == " " ){
+            $_SESSION['timeStartWord'] =  $_SESSION['timeEndWord'] = " ";
+
+        // 若有选择时间
+        }else{
+            // 若前面 team / customer / status / from 中全部为空
+            if( $_SESSION['f_teamWord'] == ' ' && $_SESSION['f_customerWord'] == ' ' && $_SESSION['f_statusWord'] == ' ' && $_SESSION['f_fromWord'] == " " ){
+
+                $_SESSION['timeStartWord'] = ' where time between "'.$_SESSION['timeStart'].'"';
+            }else{
+                $_SESSION['timeStartWord'] = ' and time between "'.$_SESSION['timeStart'].'"';
+            }
+
+            $_SESSION['timeEndWord'] = ' and "'.$_SESSION['timeEnd'].' 23:59:59"';
+
+        }
+    }
+
+
+
+
     if( $_SESSION['uid'] < 3000){
-        echo "<form class=\"selectCheck\" style=\"height:50px; border:1px #eee solid;\" action=\"adminIndex.php\" method=\"post\">";
+        echo "<form class=\"selectCheck\" style=\"height:50px; border:1px #eee solid;\" action=\"adminIndex.php\" method=\"post\">
+        <div>
+            开始日期：<input type=\"text\" name='timeStart' id=\"J-xl\">
+            结束日期：<input type=\"text\" name='timeEnd' id=\"J-xl-3\">
+            <span class='timeErr' style='color:red; visibility:hidden;'>时间段选择错误！！</span>
+        </div>
+        <br/>";
 
 
         if( $_SESSION['uid'] < 1000 ){
-            echo "<i>组别</i>
+            echo "
+        <i>组别</i>
         <select class=\"selectTeam\" name=\"F-team\">
             <option value=\" \">[不指定组]</option>
             <option value=\"100\">肖右生组</option>
@@ -252,6 +285,7 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
         客户信息列表
 
     <?php
+
     //  根据管理人员ID 是否赋予 [添加用户] 权限
     include '../poweLv/addInfoButton.php';
     //  根据登录角色不同加载不同数据
@@ -382,7 +416,22 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
     ?>
 </div>
 </body>
+
 <!--页面(数据)加载完毕后 根据是否存在data-dealer值 中文显示经销商名称 -->
 <script src="../js/dealer.js"></script>
 <script src="../js/hiddenInfo.js"></script>
+<!--日历插件运行-->
+<script type="text/javascript">
+    laydate({
+
+        elem: '#J-xl'
+
+    });
+    laydate({
+
+        elem: '#J-xl-3'
+
+    });
+
+</script>
 </html>
