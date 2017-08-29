@@ -31,7 +31,7 @@
     </style>
 </head>
 <body>
-    <h2>嘉宝后台系统</h2>
+    <h2>嘉宝后台系统(version-1.0.7)</h2>
     <form action="adminlogin.php" method="POST">
         <p>
             <span>帐号</span>
