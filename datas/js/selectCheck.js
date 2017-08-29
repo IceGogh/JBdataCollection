@@ -39,7 +39,9 @@ $(function(){
         var Custer = $('.selectCustomer'),
             teamOp = $('.selectTeam'),
             statusOp = $('.selectStatus'),
-            fromOp = $('.selectFrom')
+            fromOp = $('.selectFrom'),
+            arriveOp = $('.selectArrive'),
+            consultOp = $('.selectConsult')
             ;
 
         // 选中的 team / customer / status / from   localStorage 本地存储
@@ -97,6 +99,8 @@ $(function(){
         setSelectItem(Custer);
         setSelectItem(statusOp);
         setSelectItem(fromOp);
+        setSelectItem(arriveOp);
+        setSelectItem(consultOp);
     }
 
     $('.clearSelect').on('click', function(){
@@ -106,6 +110,8 @@ $(function(){
         sessionStorage.setItem("F-customer", " ");
         sessionStorage.setItem("F-status", " ");
         sessionStorage.setItem("F-from", " ");
+        sessionStorage.setItem("F-arrive", " ");
+        sessionStorage.setItem("F-consult", " ");
         $('select option').removeAttr('selected');
         $('#J-xl').val(' ');
         $('#J-xl-3').val(' ');

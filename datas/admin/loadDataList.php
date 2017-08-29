@@ -9,16 +9,16 @@ $nowPages = !empty($_GET['page']) ? $_GET['page'] : 1;
 if( $power == 0 ){
 
     //  全局查看
-    $result = mysqli_query( $con, "SELECT id FROM user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord']);
+    $result = mysqli_query( $con, "SELECT id FROM user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord'].@$_SESSION['f_arriveWord'].@$_SESSION['f_consultWord']);
 
 }else if( $power == 1 ){
 
     //  查看所属team的信息
-    $result = mysqli_query( $con,"SELECT id FROM user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord'] );
+    $result = mysqli_query( $con,"SELECT id FROM user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord'].@$_SESSION['f_arriveWord'].@$_SESSION['f_consultWord'] );
 
 }else if(  $power == 2 ){
     //  查看个人所负责的信息
-    $result = mysqli_query( $con,"SELECT id FROM user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord']);
+    $result = mysqli_query( $con,"SELECT id FROM user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord'].@$_SESSION['f_arriveWord'].@$_SESSION['f_consultWord']);
 }else if( $power == 4 ){
     //  经销商
     $result = mysqli_query( $con,"SELECT id FROM user where dealer = '$team'" );
@@ -52,17 +52,18 @@ if($endPage > $num_rows){
 if( $power == 0 ){
 
     //  全局查看
-    $sql = "select * from user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord']." order by id desc limit $startPage, $endPage";
+    $sql = "select * from user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord'].@$_SESSION['f_arriveWord'].@$_SESSION['f_consultWord']." order by id desc limit $startPage, $endPage";
     echo $sql;
+
 }else if( $power == 1 ){
 
     //  查看所属team的信息
-    $sql = "select * from user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord']." order by id desc limit $startPage, $endPage";
-
+    $sql = "select * from user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord'].@$_SESSION['f_arriveWord'].@$_SESSION['f_consultWord']." order by id desc limit $startPage, $endPage";
+    echo $sql;
 }else if ( $power == 2 ){
     //  查看个人所负责的信息
 
-    $sql = "select * from user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord']." order by id desc limit $startPage, $endPage";
+    $sql = "select * from user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord'].@$_SESSION['f_arriveWord'].@$_SESSION['f_consultWord']." order by id desc limit $startPage, $endPage";
 
 }else if( $power == 4 ){
     // 经销商帐号权限

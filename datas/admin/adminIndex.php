@@ -125,6 +125,7 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
 }
 
 
+
     /* 高级选择 选中客户状态 status*/
     if( @$_POST['F-status'] ){
 
@@ -199,15 +200,85 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
         }
     }
 
+    /* 高级选择 选中客户到店情况*/
+    if(@$_POST['F-arrive']){
+        $_SESSION['f_arrive'] = $_POST['F-arrive'];
+
+        // 若到店情况放 空
+        if( $_POST['F-arrive'] == " "){
+            $_SESSION['f_arriveWord'] = " ";
+
+            // 若选中 到店情况
+        }else{
+            // 若其他筛选条件 team / customer / status / from / timeEnd 全部为空
+            if( $_SESSION['f_teamWord'] == ' ' &&
+                $_SESSION['f_customerWord'] == ' ' &&
+                $_SESSION['f_statusWord'] == ' ' &&
+                $_SESSION['f_fromWord'] == " " &&
+                $_SESSION['timeEndWord'] == ' ')
+            {
+
+                $_SESSION['f_arriveWord'] = ' where arrive ="'.$_SESSION['f_arrive'].'"';
+            }else{
+                $_SESSION['f_arriveWord'] = ' and arrive ="'.$_SESSION['f_arrive'].'"';
+            }
+
+        }
+    }
+
+    /* 高级选择 选中客户咨询内容*/
+    if(@$_POST['F-consult']){
+        $_SESSION['f_consult'] = $_POST['F-consult'];
+
+        // 若客户咨询内容 放 空
+        if( $_POST['F-consult'] == " "){
+            $_SESSION['f_consultWord'] = " ";
+
+        // 若客户咨询内容选中
+        }else{
+            // 若其他筛选条件 team / customer / status / from / timeEnd / arrive 全部为空
+            if( $_SESSION['f_teamWord'] == ' ' &&
+                $_SESSION['f_customerWord'] == ' ' &&
+                $_SESSION['f_statusWord'] == ' ' &&
+                $_SESSION['f_fromWord'] == " " &&
+                $_SESSION['timeEndWord'] == ' ' &&
+                $_SESSION['f_arriveWord'] == ' '
+            )
+            {
+                $_SESSION['f_consultWord'] = ' where consult = "'.$_SESSION['f_consult'].'"';
+
+            }else{
+                $_SESSION['f_consultWord'] = ' and consult = "'.$_SESSION['f_consult'].'"';
+            }
+        }
+    }
 
 
 
     if( $_SESSION['uid'] < 3000){
-        echo "<form class=\"selectCheck\" style=\"height:50px; border:1px #eee solid;\" action=\"adminIndex.php\" method=\"post\">
+        echo "<form class=\"selectCheck\" style=\"height:130px; border:1px #eee solid;\" action=\"adminIndex.php\" method=\"post\">
         <div>
             开始日期：<input type=\"text\" name='timeStart' id=\"J-xl\">
             结束日期：<input type=\"text\" name='timeEnd' id=\"J-xl-3\">
             <span class='timeErr' style='color:red; visibility:hidden;'>时间段选择错误！！</span>
+        </div>
+        <br/>
+        
+        <div>
+            到店状态:
+                <select class='selectArrive' name='F-arrive' style='margin-right:80px;'>
+                    <option value=' '>[不指定状态]</option>
+                    <option value='未到'>未到</option>
+                    <option value='已到店'>已到店</option>
+                </select>
+            
+            咨询内容：
+                <select class='selectConsult' name='F-consult'>
+                    <option value=' '>[不指定内容]</option>
+                    <option value='橱柜'>橱柜</option>
+                    <option value='衣柜集成'>衣柜集成</option>
+                    <option value='橱柜衣柜集成'>橱柜衣柜集成</option>
+                </select>
         </div>
         <br/>";
 
@@ -340,7 +411,10 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
                 编号：<span class=\"number\">$data[id]</span>
                 <span class=\"date\">星期$data[week]</span>
                 时间：<span class=\"time\">$data[time]</span>
-                状态：<span class=\"orno$data[status]\" data-color=$data[status]></span>";
+                到店情况: <span style='color:blue'>$data[arrive]</span>
+                状态：<span class=\"orno$data[status]\" data-color=$data[status]></span>
+                
+                ";
 
     include "../poweLv/changeInfoButton.php";
         $urlencodename = urlencode($data['name']);
@@ -384,7 +458,7 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
             </div>
             
             <div>
-                QQ/微信：<span class=\"weico\">$data[weico]</span>
+                咨询内容：<span class=\"weico\">$data[consult]</span>
             </div>
             <div>
                 楼盘名称：<span class=\"house\">$data[house]</span>
