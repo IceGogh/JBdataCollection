@@ -263,7 +263,22 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
         if( $_POST['F-dealer'] == " "){
             $_SESSION['f_dealerWord'] = ' ';
 
-        // 若选中经销商
+        // 若选中 外地信息总揽
+        }else if( $_POST['F-dealer'] == '301' ){
+
+            // 若其他筛选条件 team / customer / status / from / timeEnd / arrive /  consult 全部为空
+            if( $_SESSION['f_teamWord'] == ' ' &&
+                $_SESSION['f_customerWord'] == ' ' &&
+                $_SESSION['f_statusWord'] == ' ' &&
+                $_SESSION['f_fromWord'] == " " &&
+                $_SESSION['timeEndWord'] == ' ' &&
+                $_SESSION['f_arriveWord'] == ' ' &&
+                $_SESSION['f_consultWord'] == ' '
+            ){
+                $_SESSION['f_dealerWord'] = ' where dealer between 310 and 355';
+            }else{
+                $_SESSION['f_dealerWord'] = ' and dealer between 310 and 355';
+            }
         }else{
 
             // 若其他筛选条件 team / customer / status / from / timeEnd / arrive /  consult 全部为空
@@ -313,6 +328,7 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
                 <select class='selectDealer' name='F-dealer'>
                     <option value=' '>全部信息(长沙+外地)</option>
                     <option value='300'>[长沙或未分配]</option>
+                    <option value='301'>[外地信息]</option>
                     <option value='310'>邵阳旗舰店</option>
                     <option value='311'>衡阳旗舰店</option>
                     <option value='312'>岳阳旗舰店</option>

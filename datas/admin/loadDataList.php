@@ -53,7 +53,6 @@ if( $power == 0 ){
 
     //  全局查看
     $sql = "select * from user ".@$_SESSION['f_teamWord'].@$_SESSION['f_customerWord'].@$_SESSION['f_statusWord'].@$_SESSION['f_fromWord'].@$_SESSION['timeStartWord'].@$_SESSION['timeEndWord'].@$_SESSION['f_arriveWord'].@$_SESSION['f_consultWord'].@$_SESSION['f_dealerWord']." order by id desc limit $startPage, $endPage";
-    echo $sql;
 
 }else if( $power == 1 ){
 
