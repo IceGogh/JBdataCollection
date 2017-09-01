@@ -11,7 +11,7 @@ if(!$_POST['from'] || !$_POST['name'] || !$_POST['phone']){
     $week = $weekArray[date('w')];
     $team =  floor($_SESSION['uid']/10);
 
-    $add = "insert into user (name, phone, location, house, time, status, infoFrom, team, week, weico, customer, guide) value ('$_POST[name]', '$_POST[phone]', '$_POST[city]', '$_POST[house]', '$time', '2' , '$_POST[from]', '$team', '$week', '$_POST[weico]', '$_SESSION[name]', '$_POST[guide]')";
+    $add = "insert into user (name, phone, location, house, time, status, infoFrom, team, week, consult, arrive, customer, guide) value ('$_POST[name]', '$_POST[phone]', '$_POST[city]', '$_POST[house]', '$time', '2' , '$_POST[from]', '$team', '$week', '$_POST[consult]', '未到', '$_SESSION[name]', '$_POST[guide]')";
 
     $query = mysqli_query($con, $add);
     if(!$query){

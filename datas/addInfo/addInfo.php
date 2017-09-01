@@ -71,8 +71,8 @@ echo "<form class=\"wrap\" action='addInfoSend.php' method='post'>
             </div>
             <div>
                 所属团队 : ";
-                include "../teamTransform/teamTs.php";
-        echo "
+include "../teamTransform/teamTs.php";
+echo "
             </div>
 
             <div>
@@ -82,7 +82,7 @@ echo "<form class=\"wrap\" action='addInfoSend.php' method='post'>
                 楼盘名称：<input type='text' name=\"house\">
             </div>
             <div>
-                QQ/微信：<input type='text' name=\"weico\">
+                咨询内容：<input type='text' name=\"consult\">
             </div>
            
             <div>

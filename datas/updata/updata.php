@@ -133,6 +133,7 @@ echo
                         <input type='radio' name='from' value='其他'/>其他
                     </label>                
                 </span>
+
             <script>
             /*JS 控制信息来源 checked*/
                 function checked(elm){
@@ -144,12 +145,20 @@ echo
                     checked($('.infoFrom').find('input').eq(i));
                 }
             </script>
-            </div>
+            </div>"?>
+
             <div>
-                
+                                到店情况:   
+                <select name='arrive'>
+                    <option value="未到" <?php if($data['arrive'] == '未到'){ echo "selected";}?>>未到</option>
+                    <option value="已到店" <?php if($data['arrive'] == '已到店'){ echo "selected";}?>>已到店</option>
+                </select>
             </div>
+        <?php
+        echo "
+        
             <div>
-                客户姓名：<input type='text' name='name' value='$data[name]'/>
+                客户姓名：<input type='text' style='color:#fff' name='name' value='$data[name]' readonly/>
             </div>
         
             <div>
@@ -166,22 +175,27 @@ echo
             </div>
             <div>
                 所属团队 : ";
-
             include  "../teamTransform/teamTs.php";
-
         echo "
             </div>
-
             <div>
                 所在城市 : <input type='text' name=\"location\" value='$data[location]'>
             </div>
             <div>
                 楼盘名称：<input type='text' name=\"house\" value='$data[house]'>
             </div>
+            "?>
             <div>
-                QQ/微信：<input type='text' name=\"weico\" value='$data[weico]'>
+                咨询内容：
+                <select name='consult'>
+                    <option value='待填写' <?php if( $data['consult'] == '待填写' ){ echo "selected";}?>>待填写</option>
+                    <option value='橱柜' <?php if( $data['consult'] == '橱柜' ){ echo "selected";}?>>橱柜</option>
+                    <option value='衣柜集成' <?php if( $data['consult'] == '衣柜集成' ){ echo "selected";}?>>衣柜集成</option>
+                    <option value='橱柜&衣柜集成' <?php if( $data['consult'] == '橱柜&衣柜集成' ){ echo "selected";}?>>橱柜&衣柜集成</option>
+                </select>
             </div>
-           
+<?php
+    echo "
             <div>
                 跟进导购/经销商客服：<input type='text' name=\"guide\" value='$data[guide]'>
             </div>
@@ -191,7 +205,6 @@ echo
             <div>
                 访问网页地址：<span class=\"href\">$data[href]</span>
             </div>
-            
         </div>
         <input type='submit' value='确认修改'/>
         

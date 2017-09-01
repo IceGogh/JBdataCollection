@@ -23,6 +23,7 @@ include '../lgCheck.php';
         <span>
             <?php
             echo $_SESSION['uid'];
+            echo $_SESSION['f_dealer'];
             ?>
         </span>
         用 户:
@@ -125,6 +126,7 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
 }
 
 
+
     /* 高级选择 选中客户状态 status*/
     if( @$_POST['F-status'] ){
 
@@ -199,15 +201,169 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
         }
     }
 
+    /* 高级选择 选中客户到店情况*/
+    if(@$_POST['F-arrive']){
+        $_SESSION['f_arrive'] = $_POST['F-arrive'];
 
+        // 若到店情况放 空
+        if( $_POST['F-arrive'] == " "){
+            $_SESSION['f_arriveWord'] = " ";
+
+            // 若选中 到店情况
+        }else{
+            // 若其他筛选条件 team / customer / status / from / timeEnd 全部为空
+            if( $_SESSION['f_teamWord'] == ' ' &&
+                $_SESSION['f_customerWord'] == ' ' &&
+                $_SESSION['f_statusWord'] == ' ' &&
+                $_SESSION['f_fromWord'] == " " &&
+                $_SESSION['timeEndWord'] == ' ')
+            {
+
+                $_SESSION['f_arriveWord'] = ' where arrive ="'.$_SESSION['f_arrive'].'"';
+            }else{
+                $_SESSION['f_arriveWord'] = ' and arrive ="'.$_SESSION['f_arrive'].'"';
+            }
+
+        }
+    }
+
+    /* 高级选择 选中客户咨询内容*/
+    if(@$_POST['F-consult']){
+        $_SESSION['f_consult'] = $_POST['F-consult'];
+
+        // 若客户咨询内容 放 空
+        if( $_POST['F-consult'] == " "){
+            $_SESSION['f_consultWord'] = " ";
+
+        // 若客户咨询内容选中
+        }else{
+            // 若其他筛选条件 team / customer / status / from / timeEnd / arrive 全部为空
+            if( $_SESSION['f_teamWord'] == ' ' &&
+                $_SESSION['f_customerWord'] == ' ' &&
+                $_SESSION['f_statusWord'] == ' ' &&
+                $_SESSION['f_fromWord'] == " " &&
+                $_SESSION['timeEndWord'] == ' ' &&
+                $_SESSION['f_arriveWord'] == ' '
+            )
+            {
+                $_SESSION['f_consultWord'] = ' where consult = "'.$_SESSION['f_consult'].'"';
+
+            }else{
+                $_SESSION['f_consultWord'] = ' and consult = "'.$_SESSION['f_consult'].'"';
+            }
+        }
+    }
+
+
+    /* 高级选择 选中查选经销商*/
+    if(@$_POST['F-dealer']){
+        $_SESSION['f_dealer'] = $_POST['F-dealer'];
+
+        // 若选择经销商放 空
+        if( $_POST['F-dealer'] == " "){
+            $_SESSION['f_dealerWord'] = ' ';
+
+        // 若选中经销商
+        }else{
+
+            // 若其他筛选条件 team / customer / status / from / timeEnd / arrive /  consult 全部为空
+            if( $_SESSION['f_teamWord'] == ' ' &&
+                $_SESSION['f_customerWord'] == ' ' &&
+                $_SESSION['f_statusWord'] == ' ' &&
+                $_SESSION['f_fromWord'] == " " &&
+                $_SESSION['timeEndWord'] == ' ' &&
+                $_SESSION['f_arriveWord'] == ' ' &&
+                $_SESSION['f_consultWord'] == ' '
+            ){
+                $_SESSION['f_dealerWord'] = ' where dealer = "'.$_SESSION['f_dealer'].'"';
+            }else{
+                $_SESSION['f_dealerWord'] = ' and dealer = "'.$_SESSION['f_dealer'].'"';
+            }
+        }
+    }
 
 
     if( $_SESSION['uid'] < 3000){
-        echo "<form class=\"selectCheck\" style=\"height:50px; border:1px #eee solid;\" action=\"adminIndex.php\" method=\"post\">
+        echo "<form class=\"selectCheck\" style=\"height:130px; border:1px #eee solid;\" action=\"adminIndex.php\" method=\"post\">
         <div>
             开始日期：<input type=\"text\" name='timeStart' id=\"J-xl\">
             结束日期：<input type=\"text\" name='timeEnd' id=\"J-xl-3\">
             <span class='timeErr' style='color:red; visibility:hidden;'>时间段选择错误！！</span>
+        </div>
+        <br/>
+        
+        <div>
+            到店状态:
+                <select class='selectArrive' name='F-arrive' style='margin-right:80px;'>
+                    <option value=' '>[不指定状态]</option>
+                    <option value='未到'>未到</option>
+                    <option value='已到店'>已到店</option>
+                </select>
+            
+            咨询内容：
+                <select class='selectConsult' name='F-consult'>
+                    <option value=' '>[不指定内容]</option>
+                    <option value='橱柜'>橱柜</option>
+                    <option value='衣柜集成'>衣柜集成</option>
+                    <option value='橱柜衣柜集成'>橱柜衣柜集成</option>
+                </select>
+                
+                
+            经销商选择：
+                <select class='selectDealer' name='F-dealer'>
+                    <option value=' '>全部信息(长沙+外地)</option>
+                    <option value='300'>[长沙或未分配]</option>
+                    <option value='310'>邵阳旗舰店</option>
+                    <option value='311'>衡阳旗舰店</option>
+                    <option value='312'>岳阳旗舰店</option>
+                    <option value='310'>邵阳旗舰店</option>
+                    <option value='311'>衡阳旗舰店</option>
+                    <option value='312'>	岳阳旗舰店	</option>
+                    <option value='313'>	株洲旗舰店	</option>
+                    <option value='314'>	益阳旗舰店	</option>
+                    <option value='315'>	常德旗舰店	</option>
+                    <option value='316'>	永州旗舰店	</option>
+                    <option value='317'>	张家界旗舰店	</option>
+                    <option value='318'>	湘潭旗舰店	</option>
+                    <option value='319'>	娄底旗舰店	</option>
+                    <option value='320'>	怀化旗舰店	</option>
+                    <option value='321'>	吉首旗舰店	</option>
+                    <option value='322'>	双峰店	</option>
+                    <option value='323'>	衡东店	</option>
+                    <option value='324'>	新田店	</option>
+                    <option value='325'>	桃江店	</option>
+                    <option value='326'>	临武店	</option>
+                    <option value='327'>	安仁店	</option>
+                    <option value='328'>	祁东店	</option>
+                    <option value='329'>	通道店	</option>
+                    <option value='330'>	保靖店	</option>
+                    <option value='331'>	靖州店	</option>
+                    <option value='332'>	麻阳店	</option>
+                    <option value='333'>	临澧店	</option>
+                    <option value='334'>	武冈店	</option>
+                    <option value='335'>	古丈店	</option>
+                    <option value='336'>	望城店	</option>
+                    <option value='337'>	宁乡店	</option>
+                    <option value='338'>	平江店	</option>
+                    <option value='339'>	湘阴店	</option>
+                    <option value='340'>	醴陵店	</option>
+                    <option value='341'>	汝城店	</option>
+                    <option value='342'>	浏阳店	</option>
+                    <option value='343'>	沅陵店	</option>
+                    <option value='344'>	宜章店	</option>
+                    <option value='345'>	洪江店	</option>
+                    <option value='346'>	汉寿店	</option>
+                    <option value='347'>	石门店	</option>
+                    <option value='348'>	桂阳店	</option>
+                    <option value='349'>	华容店	</option>
+                    <option value='350'>	龙山店	</option>
+                    <option value='351'>	祁阳店	</option>
+                    <option value='352'>	常宁店	</option>
+                    <option value='353'>	邵东店	</option>
+                    <option value='354'>	茶陵店	</option>
+                    <option value='355'>	嘉禾店	</option>
+
+                </select>
         </div>
         <br/>";
 
@@ -340,7 +496,10 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
                 编号：<span class=\"number\">$data[id]</span>
                 <span class=\"date\">星期$data[week]</span>
                 时间：<span class=\"time\">$data[time]</span>
-                状态：<span class=\"orno$data[status]\" data-color=$data[status]></span>";
+                到店情况: <span style='color:blue'>$data[arrive]</span>
+                状态：<span class=\"orno$data[status]\" data-color=$data[status]></span>
+                
+                ";
 
     include "../poweLv/changeInfoButton.php";
         $urlencodename = urlencode($data['name']);
@@ -384,7 +543,7 @@ if( $_SESSION['power'] == 0 ||  $_SESSION['power'] == 1 ) {
             </div>
             
             <div>
-                QQ/微信：<span class=\"weico\">$data[weico]</span>
+                咨询内容：<span class=\"weico\">$data[consult]</span>
             </div>
             <div>
                 楼盘名称：<span class=\"house\">$data[house]</span>
