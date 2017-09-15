@@ -23,7 +23,7 @@ include '../lgCheck.php';
         <span>
             <?php
             echo $_SESSION['uid'];
-            echo $_SESSION['f_dealer'];
+
             ?>
         </span>
         用 户:

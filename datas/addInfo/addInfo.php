@@ -82,7 +82,12 @@ echo "
                 楼盘名称：<input type='text' name=\"house\">
             </div>
             <div>
-                咨询内容：<input type='text' name=\"consult\">
+                咨询内容：<select name='consult'>
+                    <option value='待填写'>待填写</option>
+                    <option value='橱柜' >橱柜</option>
+                    <option value='衣柜集成'>衣柜集成</option>
+                    <option value='橱柜&衣柜集成'>橱柜&衣柜集成</option>
+                </select>
             </div>
            
             <div>
